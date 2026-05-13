@@ -781,3 +781,78 @@ if (originalOpenBookTabForBtn) {
 
 // 页面加载时也尝试创建
 setTimeout(createChaptersToggleButton, 500);
+
+// ========== 章节栏宽度可拖动调整 ==========
+function initResizeHandle() {
+    var chaptersPanel = document.getElementById('chaptersPanel');
+    var resizeHandle = document.getElementById('resizeHandle');
+    
+    if (!chaptersPanel) return;
+    
+    // 创建拖动条（如果不存在）
+    if (!resizeHandle) {
+        var handle = document.createElement('div');
+        handle.id = 'resizeHandle';
+        handle.style.cssText = 'position: absolute; right: -4px; top: 0; width: 8px; height: 100%; cursor: ew-resize; background: transparent; z-index: 10;';
+        chaptersPanel.style.position = 'relative';
+        chaptersPanel.appendChild(handle);
+        resizeHandle = handle;
+    }
+    
+    var isResizing = false;
+    var startX = 0;
+    var startWidth = 0;
+    
+    function onMouseMove(e) {
+        if (!isResizing) return;
+        var newWidth = startWidth + (e.clientX - startX);
+        // 限制最小宽度 180px，最大宽度 500px
+        if (newWidth < 180) newWidth = 180;
+        if (newWidth > 500) newWidth = 500;
+        chaptersPanel.style.width = newWidth + 'px';
+        // 保存宽度到 localStorage
+        localStorage.setItem('chapters_width', newWidth);
+    }
+    
+    function onMouseUp() {
+        isResizing = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+    }
+    
+    if (resizeHandle) {
+        resizeHandle.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            isResizing = true;
+            startX = e.clientX;
+            startWidth = chaptersPanel.offsetWidth;
+            document.body.style.cursor = 'ew-resize';
+            document.body.style.userSelect = 'none';
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+    }
+    
+    // 恢复保存的宽度
+    var savedWidth = localStorage.getItem('chapters_width');
+    if (savedWidth) {
+        var width = parseInt(savedWidth);
+        if (width >= 180 && width <= 500) {
+            chaptersPanel.style.width = width + 'px';
+        }
+    }
+}
+
+// 在打开书籍时初始化
+var originalInitBookEditorForResize = initBookEditor;
+if (originalInitBookEditorForResize) {
+    initBookEditor = function(tabId, bookId) {
+        originalInitBookEditorForResize(tabId, bookId);
+        setTimeout(initResizeHandle, 200);
+    };
+}
+
+// 页面加载时也尝试初始化
+setTimeout(initResizeHandle, 1000);
