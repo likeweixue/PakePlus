@@ -1,21 +1,54 @@
 // ========== 江湖模块 - 外部链接管理 ==========
 
-// 数据结构
 var jianghuGroups = [];
 var jianghuItems = [];
 
-// 默认数据
-var defaultJianghuGroups = [
-    { id: 'default', name: '默认分组', icon: '📁' }
-];
-var defaultJianghuItems = [
-    { id: 1, groupId: 'default', title: 'QQ交流群', url: 'https://qm.qq.com/q/你的QQ群链接', desc: '与作者们实时交流', icon: '💬' },
-    { id: 2, groupId: 'default', title: 'GitHub', url: 'https://github.com/likeweixue/OpenWrite', desc: '查看源码与反馈', icon: '🐙' },
-    { id: 3, groupId: 'default', title: '官方论坛', url: 'https://your-forum.com', desc: '分享作品与技巧', icon: '📚' },
-    { id: 4, groupId: 'default', title: '意见反馈', url: 'https://your-feedback.com', desc: '告诉我们你的想法', icon: '💡' }
-];
+function getDefaultGroups() {
+    return [{ id: 'default', name: '默认分组', icon: '📁' }];
+}
 
-// 加载数据
+function getDefaultItems() {
+    return [
+        { id: 1, groupId: 'default', title: 'GitHub', url: 'https://github.com/likeweixue/OpenWrite', desc: '查看源码与反馈', icon: '🐙' },
+        { id: 2, groupId: 'default', title: 'QQ交流群', url: 'https://qm.qq.com/q/69uBoYdjmE', desc: '群号: 1095036654', icon: '💬' },
+        { id: 3, groupId: 'default', title: '邮箱反馈', url: 'mailto:likeweixue@qq.com', desc: 'likeweixue@qq.com', icon: '📧' },
+        { id: 4, groupId: 'default', title: '写作帮手官网', url: 'https://openwrite.team', desc: '官方网站', icon: '🌐' },
+        { id: 5, groupId: 'default', title: '建议反馈', url: 'https://github.com/likeweixue/OpenWrite/issues', desc: '提交建议和问题', icon: '💡' },
+        { id: 6, groupId: 'default', title: '微信输入法', url: 'https://z.weixin.qq.com', desc: '微信键盘', icon: '⌨️' },
+        { id: 7, groupId: 'default', title: '手心输入法', url: 'https://www.xinshuru.com', desc: '手心输入法', icon: '⌨️' },
+        { id: 8, groupId: 'default', title: '豆包输入法', url: 'https://shurufa.doubao.com/pc', desc: '豆包输入法', icon: '⌨️' },
+        { id: 9, groupId: 'default', title: '谷歌浏览器', url: 'https://www.google.cn/chrome', desc: 'Chrome浏览器', icon: '🌐' },
+        { id: 10, groupId: 'default', title: '微软浏览器', url: 'https://www.microsoft.com/zh-cn/edge/download', desc: 'Edge浏览器', icon: '🌐' },
+        { id: 11, groupId: 'default', title: '在线地图生成', url: 'https://www.8desk.top', desc: '地图生成工具', icon: '🗺️' },
+        { id: 12, groupId: 'default', title: '起点萌新交流群', url: 'https://qm.qq.com/q/F8A4wBYPYY', desc: '群号: 660783010', icon: '💬' },
+        { id: 13, groupId: 'default', title: '起源小说交流群1', url: 'https://qm.qq.com/q/JncPDkywkk', desc: '群号: 834927072', icon: '💬' },
+        { id: 14, groupId: 'default', title: '起源小说交流群2', url: 'https://qm.qq.com/q/5F5jsubt3G', desc: '群号: 947399218', icon: '💬' },
+        { id: 15, groupId: 'default', title: '云深不知处', url: 'https://bbs.ysbzc.cn', desc: '网文论坛', icon: '📚' },
+        { id: 16, groupId: 'default', title: '百花深处', url: 'https://www.baihua365.com', desc: '网文论坛', icon: '📚' },
+        { id: 17, groupId: 'default', title: '百合会', url: 'https://bbs.yamibo.com/forum.php', desc: '网文论坛', icon: '📚' },
+        { id: 18, groupId: 'default', title: '慕雪阁', url: 'https://bbs.muxuege.com', desc: '网文论坛', icon: '📚' },
+        { id: 19, groupId: 'default', title: '晋江论坛', url: 'https://bbs.jjwxc.net', desc: '网文论坛', icon: '📚' },
+        { id: 20, groupId: 'default', title: '阡陌居', url: 'https://www.1000qm.vip', desc: '网文论坛', icon: '📚' },
+        { id: 21, groupId: 'default', title: '龙的天空', url: 'https://www.lkong.com/forum/2349', desc: '网文论坛', icon: '📚' },
+        { id: 22, groupId: 'default', title: '水云间', url: 'https://www.ishuiyunjian.com/', desc: '网文论坛', icon: '📚' },
+        { id: 23, groupId: 'default', title: '花开忘忧', url: 'http://fengruhua.cn/', desc: '网文论坛', icon: '📚' },
+        { id: 24, groupId: 'default', title: '转角论坛', url: 'http://bbs.zjiao.net/', desc: '网文论坛', icon: '📚' },
+        { id: 25, groupId: 'default', title: '作家助手', url: 'https://write.qq.com', desc: '写作软件', icon: '✍️' },
+        { id: 26, groupId: 'default', title: '好好码字', url: 'https://haohaomazi.com', desc: '写作软件', icon: '✍️' },
+        { id: 27, groupId: 'default', title: '橙瓜码字', url: 'https://mz.chenggua.com', desc: '写作软件', icon: '✍️' },
+        { id: 28, groupId: 'default', title: '我要码字', url: 'https://github.com/xiaoshengxianjun/51mazi', desc: '写作软件', icon: '✍️' },
+        { id: 29, groupId: 'default', title: '写作天下', url: 'https://web.writerfly.cn', desc: '写作软件', icon: '✍️' },
+        { id: 30, groupId: 'default', title: '小密圈写作', url: 'https://gitee.com/jeasonchen/small-dense-circle-writing', desc: '写作软件', icon: '✍️' },
+        { id: 31, groupId: 'default', title: '柚子写作', url: 'https://gitee.com/vic-gao/Youzi-Write', desc: '写作软件', icon: '✍️' },
+        { id: 32, groupId: 'default', title: '云上写作', url: 'http://www.yunshangxiezuo.com/web/', desc: '写作软件', icon: '✍️' },
+        { id: 33, groupId: 'default', title: '云卢写作', url: 'https://www.yunlu.co/', desc: '写作软件', icon: '✍️' },
+        { id: 34, groupId: 'default', title: 'WPS Office', url: 'https://www.wps.cn/', desc: '办公软件', icon: '📄' },
+        { id: 35, groupId: 'default', title: 'OnlyOffice', url: 'https://onlyoffice.com', desc: '办公软件', icon: '📄' },
+        { id: 36, groupId: 'default', title: 'OpenOffice', url: 'https://openoffice.org', desc: '办公软件', icon: '📄' },
+        { id: 37, groupId: 'default', title: '起源小说-抹茶投稿', url: 'mailto:3667211310@qq.com', desc: '长篇男频投稿', icon: '📧' }
+    ];
+}
+
 function loadJianghuData() {
     var savedGroups = localStorage.getItem('openwrite_jianghu_groups');
     var savedItems = localStorage.getItem('openwrite_jianghu_items');
@@ -28,26 +61,20 @@ function loadJianghuData() {
     }
     
     if (!jianghuGroups || jianghuGroups.length === 0) {
-        jianghuGroups = JSON.parse(JSON.stringify(defaultJianghuGroups));
+        jianghuGroups = getDefaultGroups();
     }
     if (!jianghuItems || jianghuItems.length === 0) {
-        jianghuItems = JSON.parse(JSON.stringify(defaultJianghuItems));
+        jianghuItems = getDefaultItems();
     }
 }
 
-// 保存数据
 function saveJianghuData() {
     localStorage.setItem('openwrite_jianghu_groups', JSON.stringify(jianghuGroups));
     localStorage.setItem('openwrite_jianghu_items', JSON.stringify(jianghuItems));
 }
 
-// 导出数据到文件
 function exportJianghuData() {
-    var data = {
-        groups: jianghuGroups,
-        items: jianghuItems,
-        exportTime: new Date().toISOString()
-    };
+    var data = { groups: jianghuGroups, items: jianghuItems, exportTime: new Date().toISOString() };
     var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
@@ -58,7 +85,6 @@ function exportJianghuData() {
     alert('江湖数据已导出');
 }
 
-// 导入数据
 function importJianghuData(file) {
     var reader = new FileReader();
     reader.onload = function(e) {
@@ -76,14 +102,18 @@ function importJianghuData(file) {
     reader.readAsText(file);
 }
 
-// 渲染江湖页面
 function renderJianghuPage() {
-    var container = document.getElementById('jianghuContainerPage');
-    if (!container) return;
+    var container = document.getElementById('jianghuContainer');
+    if (!container) {
+        console.log('jianghuContainer not found');
+        return;
+    }
+    
+    loadJianghuData();
     
     var html = `
-        <div style="padding:20px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+        <div style="padding:60px 20px 20px 20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:12px;">
                 <h2 style="margin:0;">江湖</h2>
                 <div style="display:flex; gap:12px;">
                     <button id="jhNewGroupBtn" class="btn-secondary" style="background:#6c757d;">+ 新建分组</button>
@@ -98,11 +128,10 @@ function renderJianghuPage() {
     `;
     container.innerHTML = html;
     
-    renderJianghuGroups();
+    renderGroups();
     
-    // 绑定事件
-    document.getElementById('jhNewGroupBtn').onclick = function() { openNewJianghuGroup(); };
-    document.getElementById('jhNewItemBtn').onclick = function() { openNewJianghuItem(); };
+    document.getElementById('jhNewGroupBtn').onclick = function() { openNewGroup(); };
+    document.getElementById('jhNewItemBtn').onclick = function() { openNewItem(); };
     document.getElementById('jhExportBtn').onclick = function() { exportJianghuData(); };
     document.getElementById('jhImportBtn').onclick = function() { document.getElementById('jhImportFile').click(); };
     document.getElementById('jhImportFile').onchange = function(e) {
@@ -113,7 +142,7 @@ function renderJianghuPage() {
     };
 }
 
-function renderJianghuGroups() {
+function renderGroups() {
     var container = document.getElementById('jhGroupsContainer');
     if (!container) return;
     container.innerHTML = '';
@@ -127,15 +156,15 @@ function renderJianghuGroups() {
         groupDiv.setAttribute('data-group-id', group.id);
         groupDiv.style.cssText = 'margin-bottom:30px;';
         groupDiv.innerHTML = `
-            <div class="jh-group-header" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid rgba(0,0,0,0.1);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid rgba(0,0,0,0.1);">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:24px;">${group.icon || '📁'}</span>
                     <h3 style="margin:0;">${escapeHtml(group.name)}</h3>
                     <span style="font-size:12px; opacity:0.6;">(${groupItems.length}项)</span>
                 </div>
-                <button class="jh-group-menu" data-id="${group.id}" style="background:none; border:none; font-size:18px; cursor:pointer; padding:4px 8px;">⋯</button>
+                <button class="jh-group-menu" data-id="${group.id}" style="background:none; border:none; font-size:18px; cursor:pointer;">⋯</button>
             </div>
-            <div class="jh-items-grid" data-group="${group.id}" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">
+            <div class="jh-items-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:16px;">
                 ${groupItems.map(function(item) {
                     return `
                         <div class="jh-item-card" data-id="${item.id}" draggable="true" style="background:#fff; border-radius:12px; padding:16px; cursor:pointer; transition:all 0.2s; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
@@ -145,7 +174,7 @@ function renderJianghuGroups() {
                                     <div style="font-weight:600; font-size:16px;">${escapeHtml(item.title)}</div>
                                     <div style="font-size:12px; color:#888; margin-top:4px;">${escapeHtml(item.desc || '点击打开链接')}</div>
                                 </div>
-                                <button class="jh-item-menu" data-id="${item.id}" style="background:none; border:none; font-size:16px; cursor:pointer; padding:4px;">⋯</button>
+                                <button class="jh-item-menu" data-id="${item.id}" style="background:none; border:none; font-size:16px; cursor:pointer;">⋯</button>
                             </div>
                         </div>
                     `;
@@ -155,7 +184,6 @@ function renderJianghuGroups() {
         container.appendChild(groupDiv);
     }
     
-    // 绑定卡片点击
     var cards = document.querySelectorAll('.jh-item-card');
     for (var i = 0; i < cards.length; i++) {
         cards[i].onclick = function(e) {
@@ -164,89 +192,78 @@ function renderJianghuGroups() {
             var item = jianghuItems.find(function(i) { return i.id === id; });
             if (item && item.url) window.open(item.url, '_blank');
         };
-        initDragAndDrop(cards[i]);
+        initDrag(cards[i]);
     }
     
-    // 绑定分组菜单
     var groupMenus = document.querySelectorAll('.jh-group-menu');
     for (var i = 0; i < groupMenus.length; i++) {
         groupMenus[i].onclick = function(e) {
             e.stopPropagation();
-            var groupId = this.getAttribute('data-id');
-            showJianghuGroupMenu(groupId);
+            showGroupMenu(this.getAttribute('data-id'));
         };
     }
     
-    // 绑定项目菜单
     var itemMenus = document.querySelectorAll('.jh-item-menu');
     for (var i = 0; i < itemMenus.length; i++) {
         itemMenus[i].onclick = function(e) {
             e.stopPropagation();
-            var itemId = parseInt(this.getAttribute('data-id'));
-            showJianghuItemMenu(itemId);
+            showItemMenu(parseInt(this.getAttribute('data-id')));
         };
     }
     
-    // 初始化拖拽
-    initGroupDropZones();
+    initDropZones();
 }
 
-// 拖拽功能
-var dragSourceItemId = null;
-var dragSourceGroupId = null;
+var dragSourceId = null;
+var dragSourceGroup = null;
 
-function initDragAndDrop(card) {
+function initDrag(card) {
     card.ondragstart = function(e) {
-        dragSourceItemId = parseInt(this.getAttribute('data-id'));
+        dragSourceId = parseInt(this.getAttribute('data-id'));
         var groupDiv = this.closest('.jh-group-section');
-        if (groupDiv) dragSourceGroupId = groupDiv.getAttribute('data-group-id');
-        e.dataTransfer.setData('text/plain', dragSourceItemId);
-        e.dataTransfer.effectAllowed = 'move';
+        if (groupDiv) dragSourceGroup = groupDiv.getAttribute('data-group-id');
+        e.dataTransfer.setData('text/plain', dragSourceId);
         this.style.opacity = '0.5';
     };
     card.ondragend = function(e) {
         this.style.opacity = '1';
-        dragSourceItemId = null;
-        dragSourceGroupId = null;
+        dragSourceId = null;
     };
 }
 
-function initGroupDropZones() {
+function initDropZones() {
     var groups = document.querySelectorAll('.jh-group-section');
     for (var i = 0; i < groups.length; i++) {
-        var group = groups[i];
-        group.ondragover = function(e) {
+        groups[i].ondragover = function(e) {
             e.preventDefault();
-            e.dataTransfer.dropEffect = 'move';
             this.style.backgroundColor = 'rgba(0,122,255,0.05)';
         };
-        group.ondragleave = function(e) {
+        groups[i].ondragleave = function(e) {
             this.style.backgroundColor = '';
         };
-        group.ondrop = function(e) {
+        groups[i].ondrop = function(e) {
             e.preventDefault();
             this.style.backgroundColor = '';
-            if (!dragSourceItemId) return;
-            var targetGroupId = this.getAttribute('data-group-id');
-            if (dragSourceGroupId === targetGroupId) return;
-            var item = jianghuItems.find(function(i) { return i.id === dragSourceItemId; });
+            if (!dragSourceId) return;
+            var targetGroup = this.getAttribute('data-group-id');
+            if (dragSourceGroup === targetGroup) return;
+            var item = jianghuItems.find(function(i) { return i.id === dragSourceId; });
             if (item) {
-                item.groupId = targetGroupId;
+                item.groupId = targetGroup;
                 saveJianghuData();
                 renderJianghuPage();
-                alert('已移动到目标分组');
             }
-            dragSourceItemId = null;
+            dragSourceId = null;
         };
     }
 }
 
-function showJianghuGroupMenu(groupId) {
+function showGroupMenu(groupId) {
     var group = jianghuGroups.find(function(g) { return g.id == groupId; });
     if (!group) return;
     var menu = document.createElement('div');
     menu.style.cssText = 'position:fixed; background:#fff; border-radius:8px; padding:4px 0; box-shadow:0 2px 8px rgba(0,0,0,0.15); z-index:1000; min-width:120px;';
-    menu.innerHTML = '<button class="rename-group" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;">重命名</button><button class="delete-group" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;">删除分组</button>';
+    menu.innerHTML = '<button class="rename-group" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer;">重命名</button><button class="delete-group" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer;">删除分组</button>';
     document.body.appendChild(menu);
     var rect = event.target.getBoundingClientRect();
     menu.style.top = rect.bottom + 'px';
@@ -262,7 +279,7 @@ function showJianghuGroupMenu(groupId) {
     };
     menu.querySelector('.delete-group').onclick = function() {
         if (group.name === '默认分组') { alert('默认分组不能删除'); menu.remove(); return; }
-        if (confirm('确定删除分组 "' + group.name + '" 吗？链接将移到默认分组')) {
+        if (confirm('确定删除分组 "' + group.name + '" 吗？')) {
             var defaultGroup = jianghuGroups.find(function(g) { return g.name === '默认分组'; });
             if (!defaultGroup) {
                 defaultGroup = { id: 'default', name: '默认分组', icon: '📁' };
@@ -277,19 +294,14 @@ function showJianghuGroupMenu(groupId) {
         }
         menu.remove();
     };
-    setTimeout(function() {
-        document.addEventListener('click', function closeMenu(e) {
-            if (!menu.contains(e.target)) { menu.remove(); document.removeEventListener('click', closeMenu); }
-        });
-    }, 100);
 }
 
-function showJianghuItemMenu(itemId) {
+function showItemMenu(itemId) {
     var item = jianghuItems.find(function(i) { return i.id === itemId; });
     if (!item) return;
     var menu = document.createElement('div');
     menu.style.cssText = 'position:fixed; background:#fff; border-radius:8px; padding:4px 0; box-shadow:0 2px 8px rgba(0,0,0,0.15); z-index:1000; min-width:120px;';
-    menu.innerHTML = '<button class="edit-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;">编辑</button><button class="delete-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;">删除</button><button class="move-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;">移动到分组</button>';
+    menu.innerHTML = '<button class="edit-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer;">编辑</button><button class="delete-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer;">删除</button><button class="move-item" style="display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer;">移动到分组</button>';
     document.body.appendChild(menu);
     var rect = event.target.getBoundingClientRect();
     menu.style.top = rect.bottom + 'px';
@@ -314,77 +326,48 @@ function showJianghuItemMenu(itemId) {
         menu.remove();
     };
     menu.querySelector('.move-item').onclick = function() {
-        showMoveToGroupMenuForItem(itemId, menu);
+        var groupNames = jianghuGroups.map(function(g) { return g.name; }).join(', ');
+        var newGroupName = prompt('移动到哪个分组？可选：' + groupNames, '默认分组');
+        var targetGroup = jianghuGroups.find(function(g) { return g.name === newGroupName; });
+        if (targetGroup) {
+            item.groupId = targetGroup.id;
+            saveJianghuData();
+            renderJianghuPage();
+        }
+        menu.remove();
     };
 }
 
-function showMoveToGroupMenuForItem(itemId, parentMenu) {
-    parentMenu.innerHTML = '<div style="padding:8px 12px; font-weight:500; border-bottom:1px solid #eee;">移动到分组</div>';
-    for (var i = 0; i < jianghuGroups.length; i++) {
-        var group = jianghuGroups[i];
-        var btn = document.createElement('button');
-        btn.textContent = group.name;
-        btn.style.cssText = 'display:block; width:100%; padding:8px 16px; border:none; background:none; cursor:pointer; text-align:left;';
-        btn.onclick = (function(gid) {
-            return function() {
-                var item = jianghuItems.find(function(i) { return i.id === itemId; });
-                if (item) {
-                    item.groupId = gid;
-                    saveJianghuData();
-                    renderJianghuPage();
-                    parentMenu.remove();
-                    alert('已移动');
-                }
-            };
-        })(group.id);
-        parentMenu.appendChild(btn);
-    }
-}
-
-function openNewJianghuGroup() {
+function openNewGroup() {
     var name = prompt('请输入分组名称：');
     if (name && name.trim()) {
         var newGroup = { id: Date.now().toString(), name: name.trim(), icon: '📁' };
         jianghuGroups.push(newGroup);
         saveJianghuData();
         renderJianghuPage();
-        alert('分组创建成功');
     }
 }
 
-function openNewJianghuItem() {
+function openNewItem() {
     var title = prompt('请输入链接名称：');
     if (!title || !title.trim()) return;
     var url = prompt('请输入链接地址（URL）：');
     if (!url || !url.trim()) return;
     var desc = prompt('请输入链接描述（可选）：');
-    var groupNames = jianghuGroups.map(function(g) { return g.name; }).join(', ');
-    var groupName = prompt('请选择分组（默认："默认分组"），可选：' + groupNames, '默认分组');
-    var targetGroup = jianghuGroups.find(function(g) { return g.name === (groupName || '默认分组'); });
-    if (!targetGroup) targetGroup = jianghuGroups[0];
-    
-    var newItem = {
-        id: Date.now(),
-        groupId: targetGroup.id,
-        title: title.trim(),
-        url: url.trim(),
-        desc: desc || '点击打开链接',
-        icon: '🔗'
-    };
+    var targetGroup = jianghuGroups[0];
+    if (jianghuGroups.length > 1) {
+        var groupNames = jianghuGroups.map(function(g) { return g.name; }).join(', ');
+        var groupName = prompt('请选择分组，可选：' + groupNames, '默认分组');
+        targetGroup = jianghuGroups.find(function(g) { return g.name === groupName; }) || jianghuGroups[0];
+    }
+    var newItem = { id: Date.now(), groupId: targetGroup.id, title: title.trim(), url: url.trim(), desc: desc || '点击打开链接', icon: '🔗' };
     jianghuItems.push(newItem);
     saveJianghuData();
     renderJianghuPage();
-    alert('链接添加成功');
 }
 
 function loadJianghuPageContent() {
-    loadJianghuData();
     renderJianghuPage();
 }
 
-// 初始化
 loadJianghuData();
-
-// 确保函数暴露到全局
-window.loadJianghuPageContent = loadJianghuPageContent;
-window.renderJianghuPage = renderJianghuPage;
